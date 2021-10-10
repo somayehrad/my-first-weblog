@@ -7,13 +7,13 @@ from django.utils import timezone
 # Create your views here.
 def post_list(request):
     posts=Post.objects.all()
-    return render(request,'blog\post_list.html',{'posts':posts})
+    return render(request,'blog/post_list.html',{'posts':posts})
 def jm (request):   
-    return render(request,'blog\jm.html',{})
+    return render(request,'blog/jm.html',{})
 
 def post_details(request,pk):
    post = get_object_or_404(Post, pk=pk)
-   return render(request,'blog\post_details.html', {'post': post})
+   return render(request,'blog/post_details.html', {'post': post})
 
 def post_new(request):
     if request.method == "POST":
@@ -33,7 +33,7 @@ def post_new(request):
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
-        form = PostForm(request.POST, instance=post)
+        form = PostForm(request.POST,instance=post)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
